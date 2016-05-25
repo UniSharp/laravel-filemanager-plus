@@ -4,6 +4,8 @@ var home_dir      = ds + "{{ (Config::get('lfm.allow_multi_user')) ? Auth::user(
 var shared_folder = ds + "{{ Config::get('lfm.shared_folder_name') }}";
 var image_url     = "{{ Config::get('lfm.images_url') }}";
 var file_url      = "{{ Config::get('lfm.files_url') }}";
+var ext_svr_enable= "{{config('lfm.ext_enable')}}";
+var ext_host      = "{{config('lfm.ext_host')}}"
 
 $(document).ready(function () {
   bootbox.setDefaults({locale:"{{ Lang::get('laravel-filemanager::lfm.locale-bootbox') }}"});
@@ -363,7 +365,12 @@ function useFile(file) {
       // use FCKEditor 2.0 integration method
       useFckeditor2(url);
     } else {
-      window.opener.SetUrl(url);
+      if (ext_svr_enable) {
+        window.opener.postMessage(url, ext_host);
+      }
+      else {
+        window.opener.SetUrl(url);
+      }
     }
 
     if (window.opener) {
