@@ -35,4 +35,7 @@ Route::group(array('middleware' => $middlewares, 'prefix' => 'laravel-filemanage
 
     // delete
     Route::get('/delete', 'Unisharp\Laravelfilemanager\controllers\DeleteController@getDelete');
+
+    // edit
+    Route::get('/edit', 'Unisharp\Laravelfilemanager\controllers\EditController@getEdit');
 });

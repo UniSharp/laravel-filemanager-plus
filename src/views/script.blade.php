@@ -267,6 +267,23 @@ function download(file_name) {
   + file_name;
 }
 
+function edit(image_name) {
+  $.ajax({
+    type: 'GET',
+    dataType: 'text',
+    url: '/laravel-filemanager/edit',
+    data: {
+      img: image_name,
+      working_dir: $('#working_dir').val(),
+      type: $('#type').val()
+    },
+    cache: false
+  }).done(function (data) {
+    $('#nav-buttons').addClass('hidden');
+    $('#content').html(data);
+  });
+}
+
 // ==================================
 // ==  Ckeditor, Bootbox, preview  ==
 // ==================================

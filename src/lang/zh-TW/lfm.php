@@ -8,6 +8,7 @@ return [
     'nav-list'          => '列表顯示',
 
     'menu-rename'       => '重新命名',
+    'menu-edit'         => '編輯',
     'menu-delete'       => '刪除',
     'menu-view'         => '預覽',
     'menu-download'     => '下載',
@@ -58,6 +59,20 @@ return [
     'resize-old-width'  => '原始寬度:',
     'resize-new-height' => '目前高度:',
     'resize-new-width'  => '目前寬度:',
+
+    'edit-info-base'    => '基本資訊',
+    'edit-img-id'       => '圖片代號',
+    'edit-img-cat'      => '分類',
+    'edit-info-ch'      => '中文資訊',
+    'edit-subject-ch'   => '中文標題',
+    'edit-author-ch'    => '中文作者',
+    'edit-desc-ch'      => '中文描述',
+    'edit-src-ch'       => '中文來源',
+    'edit-info-en'      => '英文資訊',
+    'edit-subject-en'   => '英文標題',
+    'edit-author-en'    => '英文作者',
+    'edit-desc-en'      => '英文描述',
+    'edit-src-en'       => '英文來源',
 
     'locale-bootbox'    => 'zh_TW',
 ];
