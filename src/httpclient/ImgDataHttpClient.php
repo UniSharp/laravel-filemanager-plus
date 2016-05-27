@@ -14,20 +14,31 @@ class ImgDataHttpClient {
 
     public static function getImgEntity($filename) {
         $client = new Client();
-        $response = $client->get(self::getHost() . self::$api_prefix . '/get_by_filename/' . $filename);
-        $resJson = $response->json();
+        $response = $client->request('GET', self::getApiUriPrefix() . '/get_by_filename/' . $filename);
+        $resObj = json_decode($response->getBody());
         
         $entity = [];
-        if ($resJson['status']['code'] === 200) {
-            $entity = $resJson['data'];
+        if ($resObj->status->code === 200) {
+            $entity = $resObj->data;
         }
         return $entity;
     }
 
     public static function deteleImgEntity($filename) {
         $client = new Client();
-        $response = $client->delete(self::getHost() . self::$api_prefix . '/delete_by_filename/' . $filename);
-        $resJson = $response->json();
+        $response = $client->request('DELETE', self::getApiUriPrefix() . '/delete_by_filename/' . $filename);
+    }
+
+    public static function updateImgEntity($id, $data) {
+        $client = new Client();
+        $response = $client->request('POST', self::getApiUriPrefix() . '/update/' . $id, ['form_params'=>$data]);
+        if ($response->getStatusCode() === 200) {
+            echo 'OK';
+        }
+    }
+
+    private static function getApiUriPrefix() {
+        return self::getHost() . self::$api_prefix;
     }
 
     private static function getHost() {

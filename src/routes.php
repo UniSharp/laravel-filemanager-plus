@@ -38,4 +38,7 @@ Route::group(array('middleware' => $middlewares, 'prefix' => 'laravel-filemanage
 
     // edit
     Route::get('/edit', 'Unisharp\Laravelfilemanager\controllers\EditController@getEdit');
+
+    // update
+    Route::post('/update/{id}', 'Unisharp\Laravelfilemanager\controllers\EditController@update');
 });
