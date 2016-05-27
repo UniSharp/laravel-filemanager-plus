@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 use Intervention\Image\Facades\Image;
+use Unisharp\Laravelfilemanager\httpclient\ImgDataHttpClient;
 
 /**
  * Class EditController
@@ -13,10 +14,14 @@ use Intervention\Image\Facades\Image;
 class EditController extends LfmController {
 
     public function getEdit() {
-        $image = Input::get('img');
+        $imgName = Input::get('imgName');
+
+        $entity = ImgDataHttpClient::getImgEntity($imgName);
+
         return View::make('laravel-filemanager::edit')
-            ->with('imgsrc', parent::getUrl('directory') . 'thumbs/' . $image)
-            ->with('img', $image);
+            ->with('imgsrc', parent::getUrl('directory') . 'thumbs/' . $imgName)
+            ->with('imgName', $imgName)
+            ->with('entity', $entity);
     }
 
     /**

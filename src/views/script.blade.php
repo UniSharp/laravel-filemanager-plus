@@ -273,7 +273,7 @@ function edit(image_name) {
     dataType: 'text',
     url: '/laravel-filemanager/edit',
     data: {
-      img: image_name,
+      imgName: image_name,
       working_dir: $('#working_dir').val(),
       type: $('#type').val()
     },

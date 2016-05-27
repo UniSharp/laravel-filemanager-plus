@@ -8,7 +8,7 @@
           <div class="panel-body">
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-img-id') }}</label>
-              <input class="form-control" name="imgid"/>
+              <input class="form-control" name="imgid" value="{{$entity['id']}}" disabled/>
             </div>
             <div class="form-gorup">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-img-cat') }}</label>
@@ -37,15 +37,15 @@
           <div class="panel-body">
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-subject-ch') }}</label>
-              <input class="form-control"/>
+              <input class="form-control" value="{{@$entity['tc_title']}}"/>
             </div>
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-author-ch') }}</label>
-              <input class="form-control"/>
+              <input class="form-control" value="{{@$entity['tc_author']}}"/>
             </div>
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-desc-ch') }}</label>
-              <textarea rows="5" class="form-control"></textarea>
+              <textarea rows="5" class="form-control">{{@$entity['tc_caption']}}</textarea>
             </div>
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-src-ch') }}</label>
@@ -60,15 +60,15 @@
           <div class="panel-body">
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-subject-en') }}</label>
-              <input class="form-control"/>
+              <input class="form-control" value="{{@$entity['en_title']}}"/>
             </div>
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-author-en') }}</label>
-              <input class="form-control"/>
+              <input class="form-control" value="{{@$entity['en_author']}}"/>
             </div>
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-desc-en') }}</label>
-              <textarea rows="5" class="form-control"></textarea>
+              <textarea rows="5" class="form-control">{{@$entity['en_caption']}}</textarea>
             </div>
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-src-en') }}</label>
@@ -83,7 +83,7 @@
         <div class="form-group pull-right">
           <div class="btn-group">
             <button class="btn btn-primary">儲存</button>
-            <button class="btn btn-danger" onclick="trash('{{ $img }}')" type="button">刪除</button>
+            <button class="btn btn-danger" onclick="trash('{{ $imgName }}')" type="button">刪除</button>
             <button class="btn btn-info" onclick="loadItems()">{{ Lang::get('laravel-filemanager::lfm.btn-cancel') }}</button>
           </div>
         </div>
