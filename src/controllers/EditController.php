@@ -15,12 +15,16 @@ class EditController extends LfmController {
     public function getEdit() {
         $imgName = Input::get('imgName');
 
-        $entity = ImgDataHttpClient::getImgEntity($imgName);
+        $data = ImgDataHttpClient::getImgEntity($imgName);
+        $data_arr = json_decode(json_encode($data), true);
 
         return View::make('laravel-filemanager::edit')
             ->with('imgsrc', parent::getUrl('directory') . 'thumbs/' . $imgName)
             ->with('imgName', $imgName)
-            ->with('entity', $entity);
+            ->with('entity', $data->image_entity)
+            ->with('sourcemap', $data_arr['news_source'])
+            ->with('category', $data_arr['category'])
+            ->with('subcat', $data_arr['subcategory']);
     }
 
     public function update($id) {

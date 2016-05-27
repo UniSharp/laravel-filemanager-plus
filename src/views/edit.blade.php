@@ -14,10 +14,24 @@
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-img-cat') }}</label>
               <div class="row">
                 <div class="col-sm-6">
-                  <select id='cat_id' class="form-control"></select>
+                  <select id='cat_id' class="form-control">
+                    @foreach($category as $key => $value)
+                      <?php $selected = (property_exists($entity, 'cat_id') && $entity->cat_id == $key) ? 'selected':'';?>
+                      <option value="{{$key}}" {{$selected}}>{{ $value }}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="col-sm-6">
-                  <select id='subcat_id' class="form-control"></select>
+                  <select id='subcat_id' class="form-control">
+                    <?php reset($category); ?>
+                    <?php $cat = !property_exists($entity, 'cat_id') || $entity->cat_id == null ? key($category) : $entity->cat_id ;?>
+                    @if(isset($subcat[$cat]))
+                      @foreach($subcat[$cat] as $key => $value)
+                        <?php $selected = (property_exists($entity, 'subcat_id') && $entity->subcat_id == $key) ? 'selected':'';?>
+                        <option value="{{$key}}" {{$selected}}>{{ $value }}</option>
+                      @endforeach
+                    @endif
+                  </select>
                 </div>
               </div>
             </div>
@@ -49,7 +63,12 @@
             </div>
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-src-ch') }}</label>
-              <select id='tc_source_id' class="form-control"></select>
+              <select id='tc_source_id' class="form-control">
+                @foreach($sourcemap[0] as $key => $value)
+                  <?php $selected = (property_exists($entity, 'tc_source_id') && $entity->tc_source_id == $key) ? 'selected':'';?>
+                  <option value="{{$key}}" {{$selected}}>{{ $value }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
         </div>
@@ -72,7 +91,12 @@
             </div>
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-src-en') }}</label>
-              <select id='en_source_id' class="form-control"></select>
+              <select id='en_source_id' class="form-control">
+                @foreach($sourcemap[1] as $key => $value)
+                  <?php $selected = (property_exists($entity, 'tc_source_id') && $entity->tc_source_id == $key) ? 'selected':'';?>
+                  <option value="{{$key}}" {{$selected}}>{{ $value }}</option>
+                @endforeach
+              </select>
             </div>
           </div>
         </div>
