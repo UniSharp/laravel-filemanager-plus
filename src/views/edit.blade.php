@@ -103,16 +103,16 @@
       dataType: "text",
       url: "/laravel-filemanager/update/" + id,
       data: {
-        //cat_id: $("#cat_id").val(),
-        //subcat_id: $("#subcat_id").val(),
+        cat_id: $("#cat_id").val(),
+        subcat_id: $("#subcat_id").val(),
         tc_title: $("#tc_title").val(),
         tc_author: $("#tc_author").val(),
         tc_caption: $("#tc_caption").val(),
-        //tc_source_id: $("#tc_source_id").val(),
+        tc_source_id: $("#tc_source_id").val(),
         en_title: $("#en_title").val(),
         en_author: $("#en_author").val(),
         en_caption: $("#en_caption").val(),
-        //en_source_id: $("#en_source_id").val()
+        en_source_id: $("#en_source_id").val()
       },
       cache: false
     }).done(function (data) {

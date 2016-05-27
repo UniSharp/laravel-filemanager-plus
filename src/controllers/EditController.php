@@ -24,7 +24,13 @@ class EditController extends LfmController {
     }
 
     public function update($id) {
-        ImgDataHttpClient::updateImgEntity($id, Input::get());
+        $input = Input::get();
+        foreach ($input as $key => $val) {
+            if ($val === '') {
+                $input[$key] = null;
+            }
+        }
+        ImgDataHttpClient::updateImgEntity($id, $input);
     }
 
 }
