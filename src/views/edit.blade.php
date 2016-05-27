@@ -93,7 +93,7 @@
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-src-en') }}</label>
               <select id='en_source_id' class="form-control">
                 @foreach($sourcemap[1] as $key => $value)
-                  <?php $selected = (property_exists($entity, 'tc_source_id') && $entity->tc_source_id == $key) ? 'selected':'';?>
+                  <?php $selected = (property_exists($entity, 'en_source_id') && $entity->en_source_id == $key) ? 'selected':'';?>
                   <option value="{{$key}}" {{$selected}}>{{ $value }}</option>
                 @endforeach
               </select>
