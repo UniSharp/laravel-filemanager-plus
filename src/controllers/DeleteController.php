@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Lang;
+use Unisharp\Laravelfilemanager\httpclient\ImgDataHttpClient;
 
 /**
  * Class CropController
@@ -45,6 +46,9 @@ class DeleteController extends LfmController {
         if ('Images' === $this->file_type) {
             File::delete($thumb_to_delete);
         }
+
+        // delete image record
+        ImgDataHttpClient::deteleImgEntity($name_to_delete);
 
         return 'OK';
     }

@@ -6,13 +6,15 @@ use GuzzleHttp\Client;
 
 class ImgDataHttpClient {
 
+    private static $api_prefix = '/api/v1/news_images';
+
     public function __construct()
     {
     }
 
     public static function getImgEntity($filename) {
         $client = new Client();
-        $response = $client->get(self::getHost() . '/api/v1/news_images/get_by_filename/' . $filename);
+        $response = $client->get(self::getHost() . self::$api_prefix . '/get_by_filename/' . $filename);
         $resJson = $response->json();
         
         $entity = [];
@@ -20,6 +22,12 @@ class ImgDataHttpClient {
             $entity = $resJson['data'];
         }
         return $entity;
+    }
+
+    public static function deteleImgEntity($filename) {
+        $client = new Client();
+        $response = $client->delete(self::getHost() . self::$api_prefix . '/delete_by_filename/' . $filename);
+        $resJson = $response->json();
     }
 
     private static function getHost() {
