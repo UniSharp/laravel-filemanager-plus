@@ -12,7 +12,7 @@ class ImgDataHttpClient {
 
     public static function getImgEntity($filename) {
         $client = new Client();
-        $response = $client->get(self::getHost() . '/news_images/get_by_filename/' . $filename);
+        $response = $client->get(self::getHost() . '/api/v1/news_images/get_by_filename/' . $filename);
         $resJson = $response->json();
         
         $entity = [];
