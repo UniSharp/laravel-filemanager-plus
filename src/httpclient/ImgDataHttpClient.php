@@ -37,6 +37,10 @@ class ImgDataHttpClient {
         }
     }
 
+    public static function  listFilenamesByKeyword($keyword) {
+        return ['574877861aa70.png', '574b18099d92a.png'];
+    }
+
     private static function getApiUriPrefix() {
         return self::getHost() . self::$api_prefix;
     }

@@ -4,6 +4,7 @@ use Unisharp\Laravelfilemanager\controllers\Controller;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
+use Unisharp\Laravelfilemanager\httpclient\ImgDataHttpClient;
 
 /**
  * Class ItemsController
@@ -24,6 +25,7 @@ class ItemsController extends LfmController {
         $path = parent::getPath();
 
         $files       = File::files($path);
+        //$files = $this->filterByKeyword($files, Input::get('keyword'));
         $file_info   = $this->getFileInfos($files, $type);
         $directories = parent::getDirectories($path);
         $thumb_url   = parent::getUrl('thumb');
@@ -92,5 +94,17 @@ class ItemsController extends LfmController {
         }
 
         return $view;
+    }
+
+    private function filterByKeyword($origFiles, $keyword)
+    {
+        $foundNames = ImgDataHttpClient::listFilenamesByKeyword($keyword);
+        $files = [];
+        foreach ($origFiles as $file) {
+            if (in_array(parent::getFileName($file)['short'], $foundNames)) {
+                $files[] = $file;
+            }
+        }
+        return $files;
     }
 }
