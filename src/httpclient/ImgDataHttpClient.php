@@ -49,6 +49,18 @@ class ImgDataHttpClient {
         return $result;
     }
 
+    public static function getCatMaps() {
+        $client = new Client();
+        $response = $client->request('GET', self::getApiUriPrefix() . '/catmaps');
+        $resObj = json_decode($response->getBody());
+
+        $entity = [];
+        if ($resObj->status->code === 200) {
+            $entity = $resObj->data;
+        }
+        return $entity;
+    }
+
     private static function getApiUriPrefix() {
         return self::getHost() . self::$api_prefix;
     }

@@ -63,7 +63,20 @@
                             <i class="fa fa-list"></i> {{ Lang::get('laravel-filemanager::lfm.nav-list') }}
                           </a>
                         </li>
-                        <li style="display: inline-flex;margin-top: 8px;margin-left: 154px">
+                        <li style="margin-top: 8px;">
+                          <select id='cat_id' class="form-control">
+                            <option value=""></option>
+                            @foreach($category as $key => $value)
+                              <option value="{{$key}}">{{ $value }}</option>
+                            @endforeach
+                          </select>
+                        </li>
+                        <li style="margin-top: 8px;">
+                          <select id='subcat_id' class="form-control">
+                            <option value=""></option>
+                          </select>
+                        </li>
+                        <li style="display: inline-flex;margin-top: 8px">
                           <input id="keyword" name="keyword" class="form-control" onkeypress="searchFieldKeyPress(event)"/>
                           <button style="" class="btn btn-default" onclick="search()">
                             <span class="glyphicon glyphicon-search"></span>

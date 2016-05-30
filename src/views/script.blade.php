@@ -6,6 +6,7 @@ var image_url     = "{{ Config::get('lfm.images_url') }}";
 var file_url      = "{{ Config::get('lfm.files_url') }}";
 var ext_svr_enable= "{{config('lfm.ext_enable')}}";
 var ext_host      = "{{config('lfm.ext_host')}}"
+var subcat_map    = <?php echo json_encode($subcat) ?>;
 
 $(document).ready(function () {
   bootbox.setDefaults({locale:"{{ Lang::get('laravel-filemanager::lfm.locale-bootbox') }}"});
@@ -82,6 +83,23 @@ var search = function() {
   var keyword = $('#keyword').val();
   loadItems(keyword);
 }
+
+var changeSubCatList = function(pid) {
+  var $el = $("#subcat_id");
+  $el.empty(); // remove old options
+  $el.append($("<option></option>").attr("value", null).text(""));
+  if (!subcat_map || !subcat_map[pid]) {
+    return;
+  }
+  $.each(subcat_map[pid], function(value, key) {
+    $el.append($("<option></option>").attr("value", value).text(key));
+  });
+}
+
+// watch cat changes
+$('#cat_id').change(function() {
+  changeSubCatList($('#cat_id').val());
+});
 
 // ======================
 // ==  Folder actions  ==

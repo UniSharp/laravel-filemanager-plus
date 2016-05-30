@@ -4,6 +4,7 @@ use Unisharp\Laravelfilemanager\controllers\Controller;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
+use Unisharp\Laravelfilemanager\httpclient\ImgDataHttpClient;
 
 /**
  * Class LfmController
@@ -51,9 +52,14 @@ class LfmController extends Controller {
         $working_dir = '/';
         $working_dir .= (Config::get('lfm.allow_multi_user')) ? $this->getUserSlug() : Config::get('lfm.shared_folder_name');
 
+        $data = ImgDataHttpClient::getCatMaps();
+        $data_arr = json_decode(json_encode($data), true);
+
         return view('laravel-filemanager::index')
             ->with('working_dir', $working_dir)
-            ->with('file_type', $this->file_type);
+            ->with('file_type', $this->file_type)
+            ->with('category', $data_arr['category'])
+            ->with('subcat', $data_arr['subcategory']);
     }
 
 
