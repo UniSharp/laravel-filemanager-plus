@@ -63,6 +63,12 @@
                             <i class="fa fa-list"></i> {{ Lang::get('laravel-filemanager::lfm.nav-list') }}
                           </a>
                         </li>
+                        <li style="display: inline-flex;margin-top: 8px;margin-left: 154px">
+                          <input id="keyword" name="keyword" class="form-control" onkeypress="searchFieldKeyPress(event)"/>
+                          <button style="" class="btn btn-default" onclick="search()">
+                            <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                        </li>
                       </ul>
                     </div>
                   </div>

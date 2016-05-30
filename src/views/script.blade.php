@@ -71,6 +71,18 @@ $('#list-display').click(function () {
   loadItems();
 });
 
+var searchFieldKeyPress = function (e) {
+  if (e.keyCode == 13) {
+    search();
+    return false;
+  }
+}
+
+var search = function() {
+  var keyword = $('#keyword').val();
+  loadItems(keyword);
+}
+
 // ======================
 // ==  Folder actions  ==
 // ======================
@@ -122,7 +134,7 @@ function loadFolders() {
   });
 }
 
-function loadItems() {
+function loadItems(keyword = null) {
   var working_dir = $('#working_dir').val();
   console.log('Current working_dir : ' + working_dir);
 
@@ -133,7 +145,8 @@ function loadItems() {
     data: {
       working_dir: working_dir,
       show_list: $('#show_list').val(),
-      type: $('#type').val()
+      type: $('#type').val(),
+      keyword: keyword
     },
     cache: false
   }).done(function (data) {
