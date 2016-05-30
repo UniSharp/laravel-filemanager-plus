@@ -14,7 +14,7 @@ class ImgDataHttpClient {
 
     public static function getImgEntity($filename) {
         $client = new Client();
-        $response = $client->request('GET', self::getApiUriPrefix() . '/get_by_filename/' . $filename);
+        $response = $client->request('GET', self::getApiUriPrefix() . '/filename/' . $filename);
         $resObj = json_decode($response->getBody());
         
         $entity = [];
@@ -26,12 +26,12 @@ class ImgDataHttpClient {
 
     public static function deteleImgEntity($filename) {
         $client = new Client();
-        $response = $client->request('DELETE', self::getApiUriPrefix() . '/delete_by_filename/' . $filename);
+        $response = $client->request('DELETE', self::getApiUriPrefix() . '/filename/' . $filename);
     }
 
     public static function updateImgEntity($id, $data) {
         $client = new Client();
-        $response = $client->request('POST', self::getApiUriPrefix() . '/update/' . $id, ['form_params'=>$data]);
+        $response = $client->request('POST', self::getApiUriPrefix() . '/' . $id, ['form_params'=>$data]);
         if ($response->getStatusCode() === 200) {
             echo 'OK';
         }
