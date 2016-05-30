@@ -81,7 +81,9 @@ var searchFieldKeyPress = function (e) {
 
 var search = function() {
   var keyword = $('#keyword').val();
-  loadItems(keyword);
+  var cat_id = $('#cat_id').val();
+  var subcat_id = $('#subcat_id').val();
+  loadItems(keyword, cat_id, subcat_id);
 }
 
 var changeSubCatList = function(pid) {
@@ -99,6 +101,11 @@ var changeSubCatList = function(pid) {
 // watch cat changes
 $('#cat_id').change(function() {
   changeSubCatList($('#cat_id').val());
+  search();
+});
+
+$('#subcat_id').change(function() {
+  search();
 });
 
 // ======================
@@ -152,7 +159,7 @@ function loadFolders() {
   });
 }
 
-function loadItems(keyword = null) {
+function loadItems(keyword = null, cat_id = null, subcat_id = null) {
   var working_dir = $('#working_dir').val();
   console.log('Current working_dir : ' + working_dir);
 
@@ -164,7 +171,9 @@ function loadItems(keyword = null) {
       working_dir: working_dir,
       show_list: $('#show_list').val(),
       type: $('#type').val(),
-      keyword: keyword
+      keyword: keyword,
+      cat_id: cat_id,
+      subcat_id: subcat_id
     },
     cache: false
   }).done(function (data) {

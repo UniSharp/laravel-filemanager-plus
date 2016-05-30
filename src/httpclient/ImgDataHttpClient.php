@@ -37,9 +37,10 @@ class ImgDataHttpClient {
         }
     }
 
-    public static function  listFilenamesByKeyword($keyword) {
+    public static function listFilenamesByKeywordCategories($keyword, $cat_id, $subcat_id) {
         $client = new Client();
-        $response = $client->request('GET', self::getApiUriPrefix(), ['query'=>['keyword'=>$keyword]]);
+        $response = $client->request('GET', self::getApiUriPrefix(), ['query'=>['keyword'=>$keyword,
+            'cat_id'=>$cat_id, 'subcat_id'=>$subcat_id]]);
 
         $result = [];
         $resObj = json_decode($response->getBody());

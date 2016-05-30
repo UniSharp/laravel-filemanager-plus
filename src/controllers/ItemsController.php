@@ -25,7 +25,8 @@ class ItemsController extends LfmController {
         $path = parent::getPath();
 
         $files       = File::files($path);
-        $files = $this->filterByKeyword($files, Input::get('keyword'));
+        $files = $this->filterByKeywordCategories($files, Input::get('keyword'), Input::get('cat_id'),
+            Input::get('subcat_id'));
         $file_info   = $this->getFileInfos($files, $type);
         $directories = parent::getDirectories($path);
         $thumb_url   = parent::getUrl('thumb');
@@ -96,12 +97,12 @@ class ItemsController extends LfmController {
         return $view;
     }
 
-    private function filterByKeyword($origFiles, $keyword)
+    private function filterByKeywordCategories($origFiles, $keyword, $cat_id, $subcat_id)
     {
-        if ($keyword === "") {
+        if ($keyword === "" && $cat_id === "" && $subcat_id === "") {
             return $origFiles;
         }
-        $foundNames = ImgDataHttpClient::listFilenamesByKeyword($keyword);
+        $foundNames = ImgDataHttpClient::listFilenamesByKeywordCategories($keyword, $cat_id, $subcat_id);
         $files = [];
         foreach ($origFiles as $file) {
             if (in_array(parent::getFileName($file)['short'], $foundNames)) {
