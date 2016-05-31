@@ -34,6 +34,8 @@ class EditController extends LfmController {
                 $input[$key] = null;
             }
         }
+        $input['filepath'] = parent::getUrl();
+        unset($input['working_dir']);
         ImgDataHttpClient::updateImgEntity($id, $input);
     }
 

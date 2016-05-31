@@ -136,7 +136,8 @@
         en_title: $("#en_title").val(),
         en_author: $("#en_author").val(),
         en_caption: $("#en_caption").val(),
-        en_source_id: $("#en_source_id").val()
+        en_source_id: $("#en_source_id").val(),
+        working_dir: $('#working_dir').val()
       },
       cache: false
     }).done(function (data) {
