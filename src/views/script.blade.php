@@ -79,15 +79,8 @@ var searchFieldKeyPress = function (e) {
   }
 }
 
-var search = function() {
-  var keyword = $('#keyword').val();
-  var cat_id = $('#cat_id').val();
-  var subcat_id = $('#subcat_id').val();
-  loadItems(keyword, cat_id, subcat_id);
-}
-
 var changeSubCatList = function(pid) {
-  var $el = $("#subcat_id");
+  var $el = $("#nav_subcat_id");
   $el.empty(); // remove old options
   $el.append($("<option></option>").attr("value", null).text(""));
   if (!subcat_map || !subcat_map[pid]) {
@@ -99,13 +92,13 @@ var changeSubCatList = function(pid) {
 }
 
 // watch cat changes
-$('#cat_id').change(function() {
-  changeSubCatList($('#cat_id').val());
-  search();
+$('#nav_cat_id').change(function() {
+  changeSubCatList($('#nav_cat_id').val());
+  loadItems();
 });
 
-$('#subcat_id').change(function() {
-  search();
+$('#nav_subcat_id').change(function() {
+  loadItems();
 });
 
 // ======================
@@ -159,7 +152,10 @@ function loadFolders() {
   });
 }
 
-function loadItems(keyword = null, cat_id = null, subcat_id = null) {
+function loadItems() {
+  var keyword = $('#keyword').val();
+  var cat_id = $('#nav_cat_id').val();
+  var subcat_id = $('#nav_subcat_id').val();
   var working_dir = $('#working_dir').val();
   console.log('Current working_dir : ' + working_dir);
 

@@ -64,7 +64,7 @@
                           </a>
                         </li>
                         <li style="margin-top: 8px;">
-                          <select id='cat_id' class="form-control">
+                          <select id='nav_cat_id' class="form-control">
                             <option value=""></option>
                             @foreach($category as $key => $value)
                               <option value="{{$key}}">{{ $value }}</option>
@@ -72,7 +72,7 @@
                           </select>
                         </li>
                         <li style="margin-top: 8px;">
-                          <select id='subcat_id' class="form-control">
+                          <select id='nav_subcat_id' class="form-control">
                             <option value=""></option>
                           </select>
                         </li>
