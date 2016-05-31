@@ -74,7 +74,7 @@ $('#list-display').click(function () {
 
 var searchFieldKeyPress = function (e) {
   if (e.keyCode == 13) {
-    search();
+    loadItems();
     return false;
   }
 }
