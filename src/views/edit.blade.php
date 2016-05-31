@@ -148,4 +148,18 @@
       }
     });
   }
+
+  // watch cat changes
+  $('#cat_id').change(function() {
+    var pid = $('#cat_id').val();
+
+    var $el = $("#subcat_id");
+    $el.empty(); // remove old options
+    if (!subcat_map || !subcat_map[pid]) {
+      return;
+    }
+    $.each(subcat_map[pid], function(value, key) {
+      $el.append($("<option></option>").attr("value", value).text(key));
+    });
+  });
 </script>
