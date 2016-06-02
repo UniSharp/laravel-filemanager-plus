@@ -43,7 +43,8 @@
       <div class="caption text-center">
         <div class="btn-group ">
           <button type="button" onclick="useFile('{{ $file_name }}')" class="btn btn-default btn-xs">
-            {{ str_limit($file_name, $limit = 10, $end = '...') }}
+            {{--{{ str_limit($file_name, $limit = 10, $end = '...') }}--}}
+            {{ '請選擇' }}
           </button>
           <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown" aria-expanded="false">
             <span class="caret"></span>
