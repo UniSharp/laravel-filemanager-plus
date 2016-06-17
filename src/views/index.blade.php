@@ -78,7 +78,7 @@
                         </li>
                         <li style="display: inline-flex;margin-top: 8px">
                           <input id="keyword" name="keyword" class="form-control" onkeypress="searchFieldKeyPress(event)"/>
-                          <button style="" class="btn btn-default" onclick="search()">
+                          <button style="" class="btn btn-default" onclick="loadItems()">
                             <span class="glyphicon glyphicon-search"></span>
                           </button>
                         </li>
