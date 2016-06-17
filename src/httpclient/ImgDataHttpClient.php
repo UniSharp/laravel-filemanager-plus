@@ -12,6 +12,15 @@ class ImgDataHttpClient {
     {
     }
 
+    public static function storeImgEntity($filename, $data) {
+        $client = new Client();
+        $response = $client->request('POST', self::getApiUriPrefix() . '/filename/' . $filename, ['form_params'=>$data]);
+        if ($response->getStatusCode() === 200) {
+            return true;
+        }
+        return false;
+    }
+
     public static function getImgEntity($filename) {
         $client = new Client();
         $response = $client->request('GET', self::getApiUriPrefix() . '/filename/' . $filename);

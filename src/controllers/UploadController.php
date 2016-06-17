@@ -10,6 +10,7 @@ use Lang;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Unisharp\Laravelfilemanager\Events\ImageWasUploaded;
+use Unisharp\Laravelfilemanager\httpclient\ImgDataHttpClient;
 
 /**
  * Class UploadController
@@ -54,6 +55,12 @@ class UploadController extends LfmController {
         }
 
         Event::fire(new ImageWasUploaded(realpath($dest_path.'/'.$new_filename)));
+
+        //Save image record
+        $data = array(
+            'filepath' => parent::getUrl()
+        );
+        ImgDataHttpClient::storeImgEntity($new_filename, $data);
 
         // upload via ckeditor 'Upload' tab
         if (!Input::has('show_list')) {
