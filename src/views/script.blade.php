@@ -79,10 +79,6 @@ var searchFieldKeyPress = function (e) {
   }
 }
 
-var search = function() {
-  loadItems();
-}
-
 var changeSubCatList = function(pid) {
   var $el = $("#nav_subcat_id");
   $el.empty(); // remove old options
