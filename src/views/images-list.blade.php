@@ -30,11 +30,11 @@
         <td>
           <i class="fa fa-image"></i>
           <?php $file_name = $file['name'];?>
-          <a href="javascript:useFile('{{ $file_name }}')">
+          <a href="javascript:fileView('{{ $file_name }}')">
             {{ $file_name }}
           </a>
           &nbsp;&nbsp;
-          <a href="javascript:rename('{{ $file_name }}')">
+          <a href="javascript:edit('{{ $file_name }}')">
             <i class="fa fa-edit"></i>
           </a>
         </td>
@@ -50,12 +50,6 @@
         <td>
           <a href="javascript:trash('{{ $file_name }}')">
             <i class="fa fa-trash fa-fw"></i>
-          </a>
-          <a href="javascript:cropImage('{{ $file_name }}')">
-            <i class="fa fa-crop fa-fw"></i>
-          </a>
-          <a href="javascript:resizeImage('{{ $file_name }}')">
-            <i class="fa fa-arrows fa-fw"></i>
           </a>
           {{--<a href="javascript:notImp()">--}}
           {{--<i class="fa fa-rotate-left fa-fw"></i>--}}
