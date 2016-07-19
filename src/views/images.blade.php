@@ -2,7 +2,7 @@
   <div class="row">
 
     @if((sizeof($files) > 0) || (sizeof($directories) > 0))
-
+    <?php $idx = 0; ?>
     @foreach($directories as $key => $dir_name)
     <div class="col-sm-3 col-md-2">
       <div class="thumbnail text-center" data-id="{{ $dir_name['long'] }}" style="margin-bottom: 0px">
@@ -27,17 +27,17 @@
 
       </div>
     </div>
+    <?php $idx++; ?>
     @endforeach
-
     @foreach($files as $key => $file)
 
     <?php $file_name = $file_info[$key]['name'];?>
     <?php $thumb_src = $thumb_url . $file_name;?>
-
-    <div class="col-sm-3 col-md-2 img-row">
+    <?php if($idx % 6 == 0) {$style = 'clear:left;';} else {$style = '';} ?>
+    <div class="col-sm-3 col-md-2 img-row" style="{{$style}}">
 
       <div class="thumbnail thumbnail-img" data-id="{{ $file_name }}" id="img_thumbnail_{{ $key }}" style="margin-bottom: 0px">
-        <img id="{{ $file }}" src="{{ $thumb_src }}" alt="" class="pointer" onclick="useFile('{{ $file_name }}')">
+        <img id="{{ $file }}" src="{{ $thumb_src }}" alt="" class="pointer" onclick="useFile('{{ $file_name }}')" width="200px" max-height="200px">
       </div>
 
       <div class="caption text-center" style="margin-bottom: 20px">
@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-
+    <?php $idx++; ?>
     @endforeach
 
     @else
