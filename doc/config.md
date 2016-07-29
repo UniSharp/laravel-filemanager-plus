@@ -34,12 +34,13 @@ In `config/lfm.php` :
     'shared_folder_name'    => 'shares',
     // the name of shared folder
 
-    'thumb_folder_name'     => 'thumbs',
-    // the name of thumb folder
-
     'images_dir'            => 'public/photos/',
     'images_url'            => '/photos/',
     // path and url of images
+
+    'images_thumb_url'      => '/small/',
+    // path of image thumb - real location id public/{images_thumb_url}
+
 
     'files_dir'             => 'public/files/',
     'files_url'             => '/files/',

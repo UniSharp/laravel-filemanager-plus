@@ -104,14 +104,12 @@ class LfmController extends Controller {
             $location .= '/';
         }
 
-        //if user is inside thumbs folder there is no need
-        // to add thumbs substring to the end of $location
-        $in_thumb_folder = preg_match('/'.Config::get('lfm.thumb_folder_name').'$/i',$working_dir);
+        // Since we move thumb out of photo foder, user will not be inside thumbs folder now.
 
-        if ($type === 'thumb' && !$in_thumb_folder) {
-            $location .= Config::get('lfm.thumb_folder_name') . '/';
+        if ($type === 'thumb') {
+            $from = '/'.preg_quote(Config::get('lfm.images_url'), '/') . '/';
+            $location = preg_replace($from, Config::get('lfm.images_thumb_url'), $location, 1);
         }
-
         return $location;
     }
 
@@ -142,7 +140,6 @@ class LfmController extends Controller {
         $url = $this->dir_location;
 
         $url = $this->formatLocation($url, $type);
-
         $url = str_replace('\\','/',$url);
 
         return $url;
@@ -151,19 +148,13 @@ class LfmController extends Controller {
 
     public function getDirectories($path)
     {
-        $thumb_folder_name = Config::get('lfm.thumb_folder_name');
         $all_directories = File::directories($path);
 
         $arr_dir = [];
-
         foreach ($all_directories as $directory) {
             $dir_name = $this->getFileName($directory);
-
-            if ($dir_name['short'] !== $thumb_folder_name) {
-                $arr_dir[] = $dir_name;
-            }
+            $arr_dir[] = $dir_name;
         }
-
         return $arr_dir;
     }
 

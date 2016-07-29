@@ -22,10 +22,12 @@ return [
     'user_field'            => 'id',
 
     'shared_folder_name'    => 'shares',
-    'thumb_folder_name'     => 'thumbs',
 
     'images_dir'            => 'public/photos/',
     'images_url'            => '/photos/',
+
+    // images thumb location will be public/{images_thumb_url}/  ex:public/small/
+    'images_thumb_url'      => '/small/',
 
     'files_dir'             => 'public/files/',
     'files_url'             => '/files/',
