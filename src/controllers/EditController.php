@@ -18,8 +18,11 @@ class EditController extends LfmController {
         $data = ImgDataHttpClient::getImgEntity($imgName);
         $data_arr = json_decode(json_encode($data), true);
 
+        $oriImgSrc = parent::getUrl('directory') . $imgName;
+        $from = '/' . preg_quote(Config::get('lfm.images_url'), '/') . '/';
+        $thumbImgSrc = preg_replace($from, Config::get('lfm.images_thumb_url'), $oriImgSrc, 1);
         return View::make('laravel-filemanager::edit')
-            ->with('imgsrc', parent::getUrl('directory') . 'thumbs/' . $imgName)
+            ->with('imgsrc', $thumbImgSrc)
             ->with('imgName', $imgName)
             ->with('entity', $data->image_entity)
             ->with('sourcemap', $data_arr['news_source'])

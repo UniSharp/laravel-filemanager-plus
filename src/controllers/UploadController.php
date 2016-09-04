@@ -128,9 +128,9 @@ class UploadController extends LfmController {
     {
         $from = '/'.preg_quote(Config::get('lfm.images_url'), '/') . '/';
         $thumb_folder_path = preg_replace($from, Config::get('lfm.images_thumb_url'), $dest_path, 1);
-
         if (!File::exists($thumb_folder_path)) {
-            File::makeDirectory($thumb_folder_path);
+	    //$path, $mode = 0755, $recursive = false
+            File::makeDirectory($thumb_folder_path, 0755, true);
         }
 
         $thumb_img = Image::make($dest_path . $new_filename);
