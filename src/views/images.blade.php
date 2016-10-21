@@ -3,32 +3,6 @@
 
     @if((sizeof($files) > 0) || (sizeof($directories) > 0))
     <?php $idx = 0; ?>
-    @foreach($directories as $key => $dir_name)
-    <div class="col-sm-3 col-md-2">
-      <div class="thumbnail text-center" data-id="{{ $dir_name['long'] }}" style="margin-bottom: 0px">
-        <a data-id="{{ $dir_name['long'] }}" class="folder-icon pointer folder-item">
-          <img src="/vendor/laravel-filemanager/img/folder.png">
-        </a>
-      </div>
-      <div class="caption text-center" style="margin-bottom: 20px">
-        <div class="btn-group">
-          <button type="button" data-id="{{ $dir_name['long'] }}" class="btn btn-default btn-xs folder-item">
-            {{ str_limit($dir_name['short'], $limit = 10, $end = '...') }}
-          </button>
-          <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown" aria-expanded="false">
-            <span class="caret"></span>
-            <span class="sr-only">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <!-- li><a href="javascript:rename('{{ $dir_name['short'] }}')"><i class="fa fa-edit fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-rename') }}</a></li -->
-            <li><a href="javascript:trash('{{ $dir_name['short'] }}')"><i class="fa fa-trash fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-delete') }}</a></li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-    <?php $idx++; ?>
-    @endforeach
     @foreach($files as $key => $file)
 
     <?php $file_name = $file_info[$key]['name'];?>
@@ -60,6 +34,32 @@
             <li><a href="javascript:trash('{{ $file_name }}')"><i class="fa fa-trash fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-delete') }}</a></li>
           </ul>
         </div>
+      </div>
+    </div>
+    <?php $idx++; ?>
+    @endforeach
+    @foreach($directories as $key => $dir_name)
+    <div class="col-sm-3 col-md-2">
+      <div class="thumbnail text-center" data-id="{{ $dir_name['long'] }}" style="margin-bottom: 0px">
+        <a data-id="{{ $dir_name['long'] }}" class="folder-icon pointer folder-item">
+          <img src="/vendor/laravel-filemanager/img/folder.png">
+        </a>
+      </div>
+      <div class="caption text-center" style="margin-bottom: 20px">
+        <div class="btn-group">
+          <button type="button" data-id="{{ $dir_name['long'] }}" class="btn btn-default btn-xs folder-item">
+            {{ str_limit($dir_name['short'], $limit = 10, $end = '...') }}
+          </button>
+          <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <!-- li><a href="javascript:rename('{{ $dir_name['short'] }}')"><i class="fa fa-edit fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-rename') }}</a></li -->
+            <li><a href="javascript:trash('{{ $dir_name['short'] }}')"><i class="fa fa-trash fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-delete') }}</a></li>
+          </ul>
+        </div>
+
       </div>
     </div>
     <?php $idx++; ?>

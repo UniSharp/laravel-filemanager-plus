@@ -78,6 +78,15 @@ class ItemsController extends LfmController {
             ];
         }
 
+        usort($file_info, function ($a, $b) {
+            $a = $a['created'];
+            $b = $b['created'];
+            if ($a == $b) {
+                return 0;
+            }
+            return ($a < $b) ? -1 : 1;
+        });
+
         return $file_info;
     }
 

@@ -10,21 +10,6 @@
       <th>{{ Lang::get('laravel-filemanager::lfm.title-action') }}</th>
     </thead>
     <tbody>
-      @foreach($directories as $key => $dir_name)
-      <tr>
-        <td>
-          <i class="fa fa-folder-o"></i>
-          <a class="folder-item pointer" data-id="{{ $dir_name['long'] }}">
-            {{ $dir_name['short'] }}
-          </a>
-        </td>
-        <td></td>
-        <td>{{ Lang::get('laravel-filemanager::lfm.type-folder') }}</td>
-        <td></td>
-        <td></td>
-      </tr>
-      @endforeach
-
       @foreach($file_info as $file)
       <tr>
         <td>
@@ -57,6 +42,22 @@
         </td>
       </tr>
       @endforeach
+
+      @foreach($directories as $key => $dir_name)
+      <tr>
+        <td>
+          <i class="fa fa-folder-o"></i>
+          <a class="folder-item pointer" data-id="{{ $dir_name['long'] }}">
+            {{ $dir_name['short'] }}
+          </a>
+        </td>
+        <td></td>
+        <td>{{ Lang::get('laravel-filemanager::lfm.type-folder') }}</td>
+        <td></td>
+        <td></td>
+      </tr>
+      @endforeach
+
     </tbody>
   </table>
 
