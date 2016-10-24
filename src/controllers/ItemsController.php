@@ -25,6 +25,16 @@ class ItemsController extends LfmController {
         $path = parent::getPath();
 
         $files       = File::files($path);
+
+        usort($files, function ($a, $b) {
+            $a = filemtime($a);
+            $b = filemtime($b);
+            if ($a == $b) {
+                return 0;
+            }
+            return ($a > $b) ? -1 : 1;
+        });
+
         $files = $this->filterByKeywordCategories($files, Input::get('keyword'), Input::get('cat_id'),
             Input::get('subcat_id'));
         $file_info   = $this->getFileInfos($files, $type);
@@ -77,15 +87,6 @@ class ItemsController extends LfmController {
                 'icon'      => $icon,
             ];
         }
-
-        usort($file_info, function ($a, $b) {
-            $a = $a['created'];
-            $b = $b['created'];
-            if ($a == $b) {
-                return 0;
-            }
-            return ($a > $b) ? -1 : 1;
-        });
 
         return $file_info;
     }
