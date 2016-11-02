@@ -363,7 +363,11 @@ function useFile(file) {
   function useCkeditor3(url) {
     if (window.opener) {
       // Popup
-      window.opener.CKEDITOR.tools.callFunction(getUrlParam('CKEditorFuncNum'), url);
+      try {
+        window.opener.CKEDITOR.tools.callFunction(getUrlParam('CKEditorFuncNum'), url);
+      } catch(err) {
+        window.opener.postMessage(url, ext_host);
+      }
     } else {
       // Modal (in iframe)
       parent.CKEDITOR.tools.callFunction(getUrlParam('CKEditorFuncNum'), url);
