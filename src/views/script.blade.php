@@ -366,7 +366,8 @@ function useFile(file) {
       try {
         window.opener.CKEDITOR.tools.callFunction(getUrlParam('CKEditorFuncNum'), url);
       } catch(err) {
-        window.opener.postMessage(url, ext_host);
+        var result = JSON.stringify({"url" : url, 'funcNum' : getUrlParam('CKEditorFuncNum')});
+        window.opener.postMessage(result, ext_host);
       }
     } else {
       // Modal (in iframe)
