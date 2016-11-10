@@ -64,6 +64,7 @@
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-src-ch') }}</label>
               <select id='tc_source_id' class="form-control">
+                <option value=""></option>
                 @foreach($sourcemap[0] as $key => $value)
                   <?php $selected = (property_exists($entity, 'tc_source_id') && $entity->tc_source_id == $key) ? 'selected':'';?>
                   <option value="{{$key}}" {{$selected}}>{{ $value }}</option>
@@ -92,6 +93,7 @@
             <div class="form-group">
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-src-en') }}</label>
               <select id='en_source_id' class="form-control">
+                <option value=""></option>
                 @foreach($sourcemap[1] as $key => $value)
                   <?php $selected = (property_exists($entity, 'en_source_id') && $entity->en_source_id == $key) ? 'selected':'';?>
                   <option value="{{$key}}" {{$selected}}>{{ $value }}</option>
@@ -158,6 +160,8 @@
     if (!subcat_map || !subcat_map[pid]) {
       return;
     }
+    console.log('here');
+    $el.append($("<option></option>"));
     $.each(subcat_map[pid], function(value, key) {
       $el.append($("<option></option>").attr("value", value).text(key));
     });
