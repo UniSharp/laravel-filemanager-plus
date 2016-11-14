@@ -41,8 +41,28 @@ class ItemsController extends LfmController {
         $directories = parent::getDirectories($path);
         $thumb_url   = parent::getUrl('thumb');
 
+        $total_items_count = 200;
+        $items_per_page = 30;
+        $total_pages_count = ceil($total_items_count / $items_per_page);
+        $current_page = Input::get('page', 1);
+        $pages = range(1, $total_pages_count);
+        $file_info = [];
+        $files = [];
+
+        $page_start = 0 + ($current_page - 1) * $items_per_page;
+        $page_end = min($page_start + $items_per_page, $total_items_count);
+        for ($i = $page_start; $i < $page_end; $i++) {
+            $file = [];
+            $file['name'] = 'test';
+            $file['size'] = '50 kb';
+            $file['type'] = 'image';
+            $file['created'] = time();
+            $files[$i] = 'test' . $i;
+            $file_info[$i] = $file;
+        }
+
         return view($view)
-            ->with(compact('files', 'file_info', 'directories', 'thumb_url'));
+            ->with(compact('files', 'file_info', 'directories', 'thumb_url', 'pages', 'current_page'));
     }
 
 
@@ -98,6 +118,10 @@ class ItemsController extends LfmController {
 
         if ($type !== 'Images') {
             $view = 'laravel-filemanager::files';
+        }
+
+        if (Input::get('keyword') !== "" || Input::get('cat_id') !== "" || Input::get('subcat_id') !== "") {
+            $view = 'laravel-filemanager::search';
         }
 
         if (Input::get('show_list') == 1) {

@@ -7,6 +7,7 @@ var file_url      = "{{ Config::get('lfm.files_url') }}";
 var ext_svr_enable= "{{config('lfm.ext_enable')}}";
 var ext_host      = "{{config('lfm.ext_host')}}"
 var subcat_map    = <?php echo json_encode($subcat) ?>;
+var current_page  = "{{$current_page or 1}}";
 
 $(document).ready(function () {
   bootbox.setDefaults({locale:"{{ Lang::get('laravel-filemanager::lfm.locale-bootbox') }}"});
@@ -101,6 +102,13 @@ $('#nav_subcat_id').change(function() {
   loadItems();
 });
 
+$(document).on('click', '.paginator', function (e) {
+  current_page = $(this).text();
+  $('ul.pagination li').removeClass('active');
+  $('.paginator:contains("' + current_page + '")').parent('li').addClass('active');
+  loadItems();
+});
+
 // ======================
 // ==  Folder actions  ==
 // ======================
@@ -169,7 +177,8 @@ function loadItems() {
       type: $('#type').val(),
       keyword: keyword,
       cat_id: cat_id,
-      subcat_id: subcat_id
+      subcat_id: subcat_id,
+      page: current_page
     },
     cache: false
   }).done(function (data) {
@@ -177,6 +186,7 @@ function loadItems() {
     $('#nav-buttons').removeClass('hidden');
     $('.dropdown-toggle').dropdown();
     setOpenFolders();
+    $('.paginator:contains("' + current_page + '")').parent('li').addClass('active');
   });
 }
 
