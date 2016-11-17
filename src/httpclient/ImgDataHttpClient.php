@@ -81,7 +81,7 @@ class ImgDataHttpClient {
         if ($extEnable) {
             $host = config('lfm.ext_host');
             //TODO for test inside homestead
-            $host = explode(':8000', $host)[0];
+            //$host = explode(':8000', $host)[0];
         }
         return $host;
     }
