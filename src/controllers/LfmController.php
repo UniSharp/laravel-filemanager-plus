@@ -148,10 +148,15 @@ class LfmController extends Controller {
 
     public function getDirectories($path)
     {
+        $contents = \Storage::disk('local')->get('blacklist-dir.txt');
+        $blacklist_arr = explode("\n", $contents);
         $all_directories = File::directories($path);
 
         $arr_dir = [];
         foreach ($all_directories as $directory) {
+            if (in_array(basename($directory), $blacklist_arr)) {
+                continue;
+            }
             $dir_name = $this->getFileName($directory);
             $arr_dir[] = $dir_name;
         }

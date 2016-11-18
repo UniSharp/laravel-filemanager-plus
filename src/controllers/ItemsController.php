@@ -25,7 +25,6 @@ class ItemsController extends LfmController {
         $path = parent::getPath();
 
         $files       = File::files($path);
-
         usort($files, function ($a, $b) {
             $a = filemtime($a);
             $b = filemtime($b);
@@ -35,14 +34,14 @@ class ItemsController extends LfmController {
             return ($a > $b) ? -1 : 1;
         });
 
+        $totalRecord = 0;// TODO: for pagination
         $files = $this->filterByKeywordCategories($files, Input::get('keyword'), Input::get('cat_id'),
-            Input::get('subcat_id'));
+            Input::get('subcat_id'), Input::get('page', 1), $totalRecord);
         $file_info   = $this->getFileInfos($files, $type);
         $directories = parent::getDirectories($path);
         $thumb_url   = parent::getUrl('thumb');
-
         return view($view)
-            ->with(compact('files', 'file_info', 'directories', 'thumb_url'));
+            ->with(compact('files', 'file_info', 'directories', 'thumb_url', 'totalRecord'));
     }
 
 
@@ -107,12 +106,15 @@ class ItemsController extends LfmController {
         return $view;
     }
 
-    private function filterByKeywordCategories($origFiles, $keyword, $cat_id, $subcat_id)
+    private function filterByKeywordCategories($origFiles, $keyword, $cat_id, $subcat_id, $page, &$totalRecord)
     {
         if ($keyword === "" && $cat_id === "" && $subcat_id === "") {
             return $origFiles;
         }
-        $foundNames = ImgDataHttpClient::listFilenamesByKeywordCategories($keyword, $cat_id, $subcat_id);
+
+        $queryResult = ImgDataHttpClient::listFilenamesByKeywordCategories($keyword, $cat_id, $subcat_id, $page);
+        $totalRecord = $queryResult->total;
+        $foundNames = $queryResult->filenames;
         $files = [];
         foreach ($origFiles as $file) {
             if (in_array(parent::getFileName($file)['short'], $foundNames)) {

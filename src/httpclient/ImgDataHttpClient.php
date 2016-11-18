@@ -46,10 +46,10 @@ class ImgDataHttpClient {
         }
     }
 
-    public static function listFilenamesByKeywordCategories($keyword, $cat_id, $subcat_id) {
+    public static function listFilenamesByKeywordCategories($keyword, $cat_id, $subcat_id, $page) {
         $client = new Client();
         $response = $client->request('GET', self::getApiUriPrefix(), ['query'=>['keyword'=>$keyword,
-            'cat_id'=>$cat_id, 'subcat_id'=>$subcat_id]]);
+            'cat_id'=>$cat_id, 'subcat_id'=>$subcat_id, 'page'=>$page]]);
 
         $result = [];
         $resObj = json_decode($response->getBody());
@@ -81,7 +81,7 @@ class ImgDataHttpClient {
         if ($extEnable) {
             $host = config('lfm.ext_host');
             //TODO for test inside homestead
-            $host = explode(':8000', $host)[0];
+            //$host = explode(':8000', $host)[0];
         }
         return $host;
     }
