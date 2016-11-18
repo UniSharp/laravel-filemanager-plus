@@ -65,10 +65,12 @@
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-src-ch') }}</label>
               <select id='tc_source_id' class="form-control">
                 <option value=""></option>
+                @if(!empty($sourcemap[0]))
                 @foreach($sourcemap[0] as $key => $value)
                   <?php $selected = (property_exists($entity, 'tc_source_id') && $entity->tc_source_id == $key) ? 'selected':'';?>
                   <option value="{{$key}}" {{$selected}}>{{ $value }}</option>
                 @endforeach
+                @endif
               </select>
             </div>
           </div>
@@ -94,10 +96,12 @@
               <label>{{ Lang::get('laravel-filemanager::lfm.edit-src-en') }}</label>
               <select id='en_source_id' class="form-control">
                 <option value=""></option>
+                @if(!empty($sourcemap[1]))
                 @foreach($sourcemap[1] as $key => $value)
                   <?php $selected = (property_exists($entity, 'en_source_id') && $entity->en_source_id == $key) ? 'selected':'';?>
                   <option value="{{$key}}" {{$selected}}>{{ $value }}</option>
                 @endforeach
+                @endif
               </select>
             </div>
           </div>
