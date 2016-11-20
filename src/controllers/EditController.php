@@ -25,7 +25,7 @@ class EditController extends LfmController {
             ->with('imgsrc', $thumbImgSrc)
             ->with('imgName', $imgName)
             ->with('entity', $data->image_entity)
-            ->with('sourcemap', $data_arr['images_source'])
+            ->with('sourcemap', $data_arr['news_source'])
             ->with('category', $data_arr['category'])
             ->with('subcat', $data_arr['subcategory']);
     }
