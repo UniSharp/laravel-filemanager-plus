@@ -42,7 +42,7 @@ class ItemsController extends LfmController {
         $directories = parent::getDirectories($path);
         $thumb_url   = parent::getUrl('thumb');
 
-        $items_per_page = count($files);
+        $items_per_page = 30;
         $pages = ($items_per_page == 0) ? [1] : range(1, ceil($totalRecord / $items_per_page));
 
         return view($view)
