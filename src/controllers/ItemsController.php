@@ -43,8 +43,7 @@ class ItemsController extends LfmController {
         $thumb_url   = parent::getUrl('thumb');
 
         $items_per_page = count($files);
-        $total_pages_count = ($items_per_page == 0) ? 0 : ceil($totalRecord / $items_per_page);
-        $pages = range(1, $total_pages_count);
+        $pages = ($items_per_page == 0) ? [1] : range(1, ceil($totalRecord / $items_per_page));
 
         return view($view)
             ->with(compact('files', 'file_info', 'directories', 'thumb_url', 'pages', 'current_page'));
