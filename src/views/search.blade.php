@@ -3,17 +3,7 @@
 
     @if(sizeof($files) > 0)
 
-    @if($pages)
-    <div class="col-md-12 text-center">
-      <nav aria-label="Page navigation">
-        <ul class="pagination">
-          @foreach($pages as $page)
-          <li><a class="paginator">{{$page}}</a></li>
-          @endforeach
-        </ul>
-      </nav>
-    </div>
-    @endif
+    @include('laravel-filemanager::pagination')
 
     <?php $idx = 0; ?>
     @foreach($files as $key => $file)
@@ -52,17 +42,7 @@
     <?php $idx++; ?>
     @endforeach
 
-    @if($pages)
-    <div class="col-md-12 text-center" style='margin-bottom: 40px;'>
-      <nav aria-label="Page navigation">
-        <ul class="pagination">
-          @foreach($pages as $page)
-          <li><a class="paginator">{{$page}}</a></li>
-          @endforeach
-        </ul>
-      </nav>
-    </div>
-    @endif
+    @include('laravel-filemanager::pagination')
 
     @else
     <div class="col-md-12">

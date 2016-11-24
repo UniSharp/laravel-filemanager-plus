@@ -2,17 +2,7 @@
 
   @if(sizeof($file_info) > 0)
 
-  @if($pages)
-  <div class="text-center">
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        @foreach($pages as $page)
-        <li><a class="paginator">{{$page}}</a></li>
-        @endforeach
-      </ul>
-    </nav>
-  </div>
-  @endif
+  @include('laravel-filemanager::pagination')
 
   <table class="table table-condensed table-striped">
     <thead>
@@ -59,17 +49,7 @@
     </tbody>
   </table>
 
-  @if($pages)
-  <div class="text-center" style='margin-bottom: 40px;'>
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        @foreach($pages as $page)
-        <li><a class="paginator">{{$page}}</a></li>
-        @endforeach
-      </ul>
-    </nav>
-  </div>
-  @endif
+  @include('laravel-filemanager::pagination')
 
   @else
   <div class="row">
