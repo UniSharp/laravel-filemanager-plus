@@ -34,14 +34,19 @@ class ItemsController extends LfmController {
             return ($a > $b) ? -1 : 1;
         });
 
+        $current_page = Input::get('page', 1);
         $totalRecord = 0;// TODO: for pagination
         $files = $this->filterByKeywordCategories($files, Input::get('keyword'), Input::get('cat_id'),
-            Input::get('subcat_id'), Input::get('page', 1), $totalRecord);
+            Input::get('subcat_id'), $current_page, $totalRecord);
         $file_info   = $this->getFileInfos($files, $type);
         $directories = parent::getDirectories($path);
         $thumb_url   = parent::getUrl('thumb');
+
+        $items_per_page = 30;
+        $pages = ($items_per_page == 0) ? [1] : range(1, ceil($totalRecord / $items_per_page));
+
         return view($view)
-            ->with(compact('files', 'file_info', 'directories', 'thumb_url', 'totalRecord'));
+            ->with(compact('files', 'file_info', 'directories', 'thumb_url', 'pages', 'current_page'));
     }
 
 
@@ -97,6 +102,10 @@ class ItemsController extends LfmController {
 
         if ($type !== 'Images') {
             $view = 'laravel-filemanager::files';
+        }
+
+        if (Input::get('keyword') !== "" || Input::get('cat_id') !== "" || Input::get('subcat_id') !== "") {
+            $view = 'laravel-filemanager::search';
         }
 
         if (Input::get('show_list') == 1) {
