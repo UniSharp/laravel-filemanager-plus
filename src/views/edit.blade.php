@@ -114,7 +114,7 @@
           <div class="btn-group">
             <button class="btn btn-primary" onclick="update({{$entity->id}})" type="button">儲存</button>
             <button class="btn btn-danger" onclick="trash('{{ $imgName }}')" type="button">刪除</button>
-            <button class="btn btn-info" onclick="loadItems()">{{ Lang::get('laravel-filemanager::lfm.btn-cancel') }}</button>
+            <button class="btn btn-info" onclick="loadItems()" type="button">{{ Lang::get('laravel-filemanager::lfm.btn-cancel') }}</button>
           </div>
         </div>
       </div>
