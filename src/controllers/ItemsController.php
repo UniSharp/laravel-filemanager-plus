@@ -112,21 +112,27 @@ class ItemsController extends LfmController {
     private function getFormattedPath($file)
     {
         $file_name = parent::getFileName($file)['short'];
+        $ds = '/';
+        $ds_display = '>';
 
         $shared_folder_name = config('lfm.shared_folder_name');
         $pos_share = strpos($file, $shared_folder_name);
 
         if ($pos_share !== false) {
-            $path_start = $pos_share + strlen($shared_folder_name . '/');
+            $path_start = $pos_share + strlen($shared_folder_name . $ds);
         } else {
-            $path_start = strpos($file, 'public/') + strlen('public/');
+            $path_start = strpos($file, 'public' . $ds) + strlen('public' . $ds);
         }
 
         $folders = substr($file, $path_start, strlen($file) - strlen($file_name) - $path_start);
 
-        $path_to_display = implode(' / ', explode('/', $folders));
+        if (ends_with($folders, $ds)) {
+            $folders = substr($folders, 0, strlen($folders) - 1);
+        }
 
-        return $path_to_display ?: '根目錄 / ';
+        $path_to_display = '/ ' . implode(' ' . $ds_display . ' ', explode($ds, $folders));
+
+        return $path_to_display;
     }
 
 
