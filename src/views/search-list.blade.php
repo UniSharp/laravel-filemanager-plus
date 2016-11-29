@@ -1,8 +1,10 @@
 <div class="container">
 
-  @if(sizeof($file_info) > 0)
-
+  @if(sizeof($files) > 0)
   @include('laravel-filemanager::pagination')
+  @endif
+
+  @if(sizeof($file_info) > 0)
 
   <table class="table table-condensed table-striped">
     <thead>
@@ -14,6 +16,7 @@
     </thead>
     <tbody>
       @foreach($file_info as $file)
+      <?php $image_not_found = $file['size'] == 'unknown';?>
       <tr>
         <td>
           <i class="fa fa-image"></i>
@@ -33,7 +36,7 @@
           {{ $file['type'] }}
         </td>
         <td>
-          {{ date("Y-m-d h:m", $file['created']) }}
+          {{ $image_not_found ? 'unknown' : date("Y-m-d h:m", $file['created']) }}
         </td>
         <td>
           <a href="javascript:trash('{{ $file_name }}')">
@@ -49,14 +52,16 @@
     </tbody>
   </table>
 
-  @include('laravel-filemanager::pagination')
-
   @else
   <div class="row">
     <div class="col-md-12">
       <p>找不到圖片</p>
     </div>
   </div>
+  @endif
+
+  @if(sizeof($files) > 0)
+  @include('laravel-filemanager::pagination')
   @endif
 
 </div>

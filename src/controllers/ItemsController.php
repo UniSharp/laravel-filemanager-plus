@@ -35,7 +35,7 @@ class ItemsController extends LfmController {
         });
 
         $current_page = Input::get('page', 1);
-        $totalRecord = 0;// TODO: for pagination
+        $totalRecord = 0;
         $files = $this->filterByKeywordCategories($files, Input::get('keyword'), Input::get('cat_id'),
             Input::get('subcat_id'), $current_page, $totalRecord);
         $file_info   = $this->getFileInfos($files, $type);
@@ -56,6 +56,18 @@ class ItemsController extends LfmController {
 
         foreach ($files as $key => $file) {
             $file_name = parent::getFileName($file)['short'];
+
+            if (!File::exists($file)) {
+                $file_info[$key] = [
+                    'name'      => $file_name,
+                    'size'      => 'unknown',
+                    'created'   => 'unknown',
+                    'type'      => 'unknown',
+                    'icon'      => 'fa-exclamation-triangle',
+                ];
+                continue;
+            }
+
             $file_created = filemtime($file);
             $file_size = number_format((File::size($file) / 1024), 2, ".", "");
 
@@ -125,10 +137,8 @@ class ItemsController extends LfmController {
         $totalRecord = $queryResult->total;
         $foundNames = $queryResult->filenames;
         $files = [];
-        foreach ($origFiles as $file) {
-            if (in_array(parent::getFileName($file)['short'], $foundNames)) {
-                $files[] = $file;
-            }
+        foreach ($foundNames as $file) {
+            $files[] = public_path(substr($file, 1));
         }
         return $files;
     }

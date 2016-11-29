@@ -1,21 +1,32 @@
 <div class="container">
+
+  @if(sizeof($files) > 0)
+  @include('laravel-filemanager::pagination')
+  @endif
+
   <div class="row">
 
     @if(sizeof($files) > 0)
-
-    @include('laravel-filemanager::pagination')
 
     <?php $idx = 0; ?>
     @foreach($files as $key => $file)
 
     <?php $file_name = $file_info[$key]['name'];?>
+    <?php $image_not_found = $file_info[$key]['size'] == 'unknown';?>
     <?php $thumb_src = $thumb_url . $file_name;?>
     <?php if($idx % 6 == 0) {$style = 'clear:left;';} else {$style = '';} ?>
     <div class="col-sm-3 col-md-2 img-row" style="{{$style}}">
 
+      @if($image_not_found)
+      <div class="thumbnail thumbnail-img text-center" data-id="{{ $file_name }}" id="img_thumbnail_{{ $key }}">
+        <i class="fa {{ $file_info[$key]['icon'] }} fa-5x" style="height:200px;cursor:pointer;padding-top:60px;"></i>
+        <p style="margin-top: -65px; padding-bottom: 35px">找不到圖片</p>
+      </div>
+      @else
       <div class="thumbnail thumbnail-img" data-id="{{ $file_name }}" id="img_thumbnail_{{ $key }}" style="margin-bottom: 0px">
         <img id="{{ $file }}" src="{{ $thumb_src }}" alt="" class="pointer" onclick="useFile('{{ $file_name }}')" width="200px" max-height="200px">
       </div>
+      @endif
 
       <div class="caption text-center" style="margin-bottom: 20px">
         <div class="btn-group ">
@@ -42,8 +53,6 @@
     <?php $idx++; ?>
     @endforeach
 
-    @include('laravel-filemanager::pagination')
-
     @else
     <div class="col-md-12">
       <p>找不到圖片</p>
@@ -51,4 +60,9 @@
     @endif
 
   </div>
+
+  @if(sizeof($files) > 0)
+  @include('laravel-filemanager::pagination')
+  @endif
+
 </div>
