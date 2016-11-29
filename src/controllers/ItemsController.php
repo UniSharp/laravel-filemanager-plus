@@ -114,7 +114,13 @@ class ItemsController extends LfmController {
         $file_name = parent::getFileName($file)['short'];
 
         $shared_folder_name = config('lfm.shared_folder_name');
-        $path_start = strpos($file, $shared_folder_name) + strlen($shared_folder_name . '/');
+        $pos_share = strpos($file, $shared_folder_name);
+
+        if ($pos_share !== false) {
+            $path_start = $pos_share + strlen($shared_folder_name . '/');
+        } else {
+            $path_start = strpos($file, 'public/') + strlen('public/');
+        }
 
         $folders = substr($file, $path_start, strlen($file) - strlen($file_name) - $path_start);
 

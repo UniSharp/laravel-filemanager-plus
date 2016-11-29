@@ -19,7 +19,7 @@
 
       @if($image_not_found)
       <div class="thumbnail thumbnail-img text-center" data-id="{{ $file_name }}" id="img_thumbnail_{{ $key }}">
-        <i class="fa {{ $file_info[$key]['icon'] }} fa-5x" style="height:200px;cursor:pointer;padding-top:60px;"></i>
+        <i id="{{ $file }}" class="fa {{ $file_info[$key]['icon'] }} fa-5x" style="height:200px;cursor:pointer;padding-top:60px;"></i>
         <p style="margin-top: -65px; padding-bottom: 35px">找不到圖片</p>
       </div>
       @else
