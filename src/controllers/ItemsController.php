@@ -102,6 +102,7 @@ class ItemsController extends LfmController {
                 'created'   => $file_created,
                 'type'      => $file_type,
                 'icon'      => $icon,
+                'folders'   => $this->getFormattedPath($file)
             ];
         }
 
