@@ -25,6 +25,7 @@ return [
     'title-type'        => 'Type',
     'title-modified'    => 'Modified',
     'title-action'      => 'Action',
+    'title-folders'     => 'Folders',
 
     'type-folder'       => 'Folder',
 

@@ -27,7 +27,7 @@
         <img id="{{ $file }}" src="{{ $thumb_src }}" alt="" class="pointer" onclick="useFile('{{ $file_name }}')" width="200px" max-height="200px">
       </div>
       @endif
-
+      <p style="color:#999">資料夾：{{$file_info[$key]['folders']}}</p>
       <div class="caption text-center" style="margin-bottom: 20px">
         <div class="btn-group ">
           <button type="button" onclick="useFile('{{ $file_name }}')" class="btn btn-default btn-xs">

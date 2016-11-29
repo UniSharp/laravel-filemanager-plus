@@ -64,6 +64,7 @@ class ItemsController extends LfmController {
                     'created'   => 'unknown',
                     'type'      => 'unknown',
                     'icon'      => 'fa-exclamation-triangle',
+                    'folders'   => $this->getFormattedPath($file)
                 ];
                 continue;
             }
@@ -105,6 +106,20 @@ class ItemsController extends LfmController {
         }
 
         return $file_info;
+    }
+
+    private function getFormattedPath($file)
+    {
+        $file_name = parent::getFileName($file)['short'];
+
+        $shared_folder_name = config('lfm.shared_folder_name');
+        $path_start = strpos($file, $shared_folder_name) + strlen($shared_folder_name . '/');
+
+        $folders = substr($file, $path_start, strlen($file) - strlen($file_name) - $path_start);
+
+        $path_to_display = implode(' / ', explode('/', $folders));
+
+        return $path_to_display ?: '根目錄 / ';
     }
 
 

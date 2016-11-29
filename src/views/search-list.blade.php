@@ -8,9 +8,9 @@
 
   <table class="table table-condensed table-striped">
     <thead>
-      <th>{{ Lang::get('laravel-filemanager::lfm.title-item') }}</th>
+      <th width="30%">{{ Lang::get('laravel-filemanager::lfm.title-item') }}</th>
+      <th width="35%">{{ Lang::get('laravel-filemanager::lfm.title-folders') }}</th>
       <th>{{ Lang::get('laravel-filemanager::lfm.title-size') }}</th>
-      <th>{{ Lang::get('laravel-filemanager::lfm.title-type') }}</th>
       <th>{{ Lang::get('laravel-filemanager::lfm.title-modified') }}</th>
       <th>{{ Lang::get('laravel-filemanager::lfm.title-action') }}</th>
     </thead>
@@ -30,10 +30,10 @@
           </a>
         </td>
         <td>
-          {{ $file['size'] }}
+          {{ $file['folders'] }}
         </td>
         <td>
-          {{ $file['type'] }}
+          {{ $file['size'] }}
         </td>
         <td>
           {{ $image_not_found ? 'unknown' : date("Y-m-d h:m", $file['created']) }}

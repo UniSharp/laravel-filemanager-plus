@@ -26,6 +26,7 @@ return [
     'title-type'        => '檔案類型',
     'title-modified'    => '上次修改',
     'title-action'      => '操作',
+    'title-folders'     => '資料夾',
 
     'type-folder'       => '資料夾',
 
