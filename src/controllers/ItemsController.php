@@ -144,7 +144,7 @@ class ItemsController extends LfmController {
             $view = 'laravel-filemanager::files';
         }
 
-        if (Input::get('keyword') !== "" || Input::get('cat_id') !== "" || Input::get('subcat_id') !== "") {
+        if ($this->shouldSearch()) {
             $view = 'laravel-filemanager::search';
         }
 
@@ -155,9 +155,17 @@ class ItemsController extends LfmController {
         return $view;
     }
 
+    private function shouldSearch()
+    {
+        $query_is_valid = Input::get('keyword') !== "" || Input::get('cat_id') !== "" || Input::get('subcat_id') !== "";
+        $visiting_root_directory = Input::get('working_dir') == '/'.config('lfm.shared_folder_name');
+
+        return $query_is_valid || $visiting_root_directory;
+    }
+
     private function filterByKeywordCategories($origFiles, $keyword, $cat_id, $subcat_id, $page, &$totalRecord)
     {
-        if ($keyword === "" && $cat_id === "" && $subcat_id === "") {
+        if (!$this->shouldSearch()) {
             return $origFiles;
         }
 
