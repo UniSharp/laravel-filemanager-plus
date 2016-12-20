@@ -56,7 +56,7 @@ $('#upload-btn').click(function () {
       notify(responseText);
     }
     $('#upload').val('');
-    loadItems();
+    setTimeout(loadItems, 100);
   }
 
   $('#uploadForm').ajaxSubmit(options);
