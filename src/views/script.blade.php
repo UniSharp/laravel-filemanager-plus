@@ -56,7 +56,9 @@ $('#upload-btn').click(function () {
       notify(responseText);
     }
     $('#upload').val('');
-    setTimeout(loadItems, 100);
+    loadItems(function () {
+      $('#right-nav > nav').after($('<div>').addClass('alert alert-success').text('圖片已上傳完成，若未看到圖片，請點選 重新整理'));
+    });
   }
 
   $('#uploadForm').ajaxSubmit(options);
@@ -160,7 +162,7 @@ function loadFolders() {
   });
 }
 
-function loadItems() {
+function loadItems(callback) {
   var keyword = $('#keyword').val();
   var cat_id = $('#nav_cat_id').val();
   var subcat_id = $('#nav_subcat_id').val();
@@ -182,11 +184,13 @@ function loadItems() {
     },
     cache: false
   }).done(function (data) {
+    $('.alert.alert-success').remove();
     $('#content').html(data);
     $('#nav-buttons').removeClass('hidden');
     $('.dropdown-toggle').dropdown();
     setOpenFolders();
     $('.paginator[data-page=' + current_page + ']').parent('li').addClass('active');
+    if (callback) callback();
   });
 }
 
