@@ -8,11 +8,11 @@
       @if($current_page - $first_page > $margin)
         <li><a class="paginator" data-page="{{$first_page}}"> << </a></li>
       @endif
-      @foreach($pages as $page)
-        @if(abs($page - $current_page) <= $margin)
-          <li><a class="paginator" data-page="{{$page}}">{{$page}}</a></li>
-        @endif
-      @endforeach
+@foreach($pages as $page)
+@if(abs($page - $current_page) <= $margin)
+  <li><a class="paginator" data-page="{{$page}}">{{$page}}</a></li>
+@endif
+@endforeach
       @if(end($pages) - $current_page > $margin)
         <li><a class="paginator" data-page="{{$last_page}}"> >> </a></li>
       @endif
