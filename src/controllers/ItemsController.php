@@ -40,7 +40,7 @@ class ItemsController extends LfmController {
             Input::get('subcat_id'), $current_page, $totalRecord);
         $file_info   = $this->getFileInfos($files, $type);
         $directories = parent::getDirectories($path);
-        $thumb_url   = parent::getUrl('thumb');
+        $thumb_url   = Config::get('lfm.images_thumb_url');
 
         $items_per_page = 30;
         $pages = ($items_per_page == 0) ? [1] : range(1, ceil($totalRecord / $items_per_page));
@@ -55,7 +55,8 @@ class ItemsController extends LfmController {
         $file_info = [];
 
         foreach ($files as $key => $file) {
-            $file_name = parent::getFileName($file)['short'];
+            $arr_file_name = parent::getFileName($file);
+            $file_name = $arr_file_name['short'];
 
             if (!File::exists($file)) {
                 $file_info[$key] = [
@@ -98,6 +99,7 @@ class ItemsController extends LfmController {
 
             $file_info[$key] = [
                 'name'      => $file_name,
+                'long_name' => substr($arr_file_name['long'], 1),
                 'size'      => $file_size,
                 'created'   => $file_created,
                 'type'      => $file_type,
