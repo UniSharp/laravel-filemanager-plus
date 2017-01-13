@@ -61,6 +61,7 @@ class ItemsController extends LfmController {
             if (!File::exists($file)) {
                 $file_info[$key] = [
                     'name'      => $file_name,
+                    'long_name' => 'unknown',
                     'size'      => 'unknown',
                     'created'   => 'unknown',
                     'type'      => 'unknown',

@@ -398,25 +398,13 @@ function useFile(file) {
   }
 
   function getFileUrl(file) {
-    var path = $('#working_dir').val();
-    var item_url = image_url;
+    var item_url = image_url + file;
 
     @if ("Images" !== $file_type)
-    item_url = file_url;
+    item_url = file_url + file;
     @endif
 
-    if (path.indexOf(ds) === 0) {
-      path = path.substring(1);
-    }
-
-    if (path != ds) {
-      item_url = item_url + path + ds;
-    }
-
-    var url = item_url + file;
-    url = url.replace(/\\/g, "/");
-
-    return url;
+    return item_url;
   }
 
   var url = getFileUrl(file);

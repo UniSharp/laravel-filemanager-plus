@@ -13,7 +13,8 @@
 
     <?php $file_name = $file_info[$key]['name'];?>
     <?php $image_not_found = $file_info[$key]['size'] == 'unknown';?>
-    <?php $thumb_src = $thumb_url . $file_info[$key]['long_name'];?>
+    <?php $long_name = $file_info[$key]['long_name'];?>
+    <?php $thumb_src = $thumb_url . $long_name;?>
     <?php $original_src = str_replace(public_path(), '', $file);?>
     <?php if($idx % 6 == 0) {$style = 'clear:left;';} else {$style = '';} ?>
     <div class="col-sm-3 col-md-2 img-row" style="{{$style}}">
@@ -25,13 +26,13 @@
       </div>
       @else
       <div class="thumbnail thumbnail-img" data-id="{{ $file_name }}" id="img_thumbnail_{{ $key }}" style="margin-bottom: 0px">
-        <img id="{{ $file }}" src="{{ $thumb_src }}" alt="" class="pointer" onclick="useFile('{{ $file_name }}')" width="200px" max-height="200px" onerror="this.src='{{$original_src}}'">
+        <img id="{{ $file }}" src="{{ $thumb_src }}" alt="" class="pointer" onclick="useFile('{{ $long_name }}')" width="200px" max-height="200px" onerror="this.src='{{$original_src}}'">
       </div>
       @endif
       <p style="color:#999">{{$file_info[$key]['folders']}}</p>
       <div class="caption text-center" style="margin-bottom: 20px">
         <div class="btn-group ">
-          <button type="button" onclick="useFile('{{ $file_name }}')" class="btn btn-default btn-xs">
+          <button type="button" onclick="useFile('{{ $long_name }}')" class="btn btn-default btn-xs">
             {{--{{ str_limit($file_name, $limit = 10, $end = '...') }}--}}
             {{ '請選擇' }}
           </button>
