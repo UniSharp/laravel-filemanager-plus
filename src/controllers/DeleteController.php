@@ -20,12 +20,13 @@ class DeleteController extends LfmController {
      */
     public function getDelete()
     {
-        $name_to_delete = Input::get('items');
+        $longFileName = Input::get('items');
+        $name_to_delete = pathinfo($longFileName)['basename'];
 
         $file_path = parent::getPath('directory');
 
-        $file_to_delete = $file_path . $name_to_delete;
-        $thumb_to_delete = parent::getPath('thumb') . $name_to_delete;
+        $file_to_delete = public_path(). Config::get('lfm.images_url') . $longFileName;
+        $thumb_to_delete = public_path(). Config::get('lfm.images_thumb_url') . $longFileName;
 
         if (!File::exists($file_to_delete)) {
             return $file_to_delete . ' not found!';

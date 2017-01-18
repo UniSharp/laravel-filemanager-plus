@@ -18,7 +18,7 @@ class DownloadController extends LfmController {
      */
     public function getDownload()
     {
-        return Response::download(parent::getPath('directory') . Input::get('file'));
+        $filepath = public_path(). Config::get('lfm.images_url') . Input::get('file');
+        return Response::download($filepath);
     }
-
 }

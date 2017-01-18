@@ -454,7 +454,8 @@ function notify(x) {
 
 function fileView(x) {
   var rnd = makeRandom();
-  var img_src = image_url + $('#working_dir').val() + ds + x;
+  var img_src = image_url + ds +x;
+
   var img = "<img class='img img-responsive center-block' src='" + img_src + "'>";
   $('#fileview_body').html(img);
   $('#fileViewModal').modal();
