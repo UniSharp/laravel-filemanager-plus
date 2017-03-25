@@ -1,3 +1,8 @@
+# Do not use me
+
+this is for a specific customer, and it has stoped development. Please use https://github.com/UniSharp/laravel-filemanager instead.
+
+
 # Laravel Filemanager
 
 A files and images management user interface with file uploading support. (Works well with CKEditor and TinyMCE)
