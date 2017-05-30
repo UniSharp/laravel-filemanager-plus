@@ -6,17 +6,18 @@
     @foreach($files as $key => $file)
 
     <?php $file_name = $file_info[$key]['name'];?>
-    <?php $thumb_src = $thumb_url . $file_name;?>
+    <?php $long_name = $file_info[$key]['long_name']; ?>
+    <?php $thumb_src = '/' . str_replace('shares/', 'small/', $long_name);?>
     <?php if($idx % 6 == 0) {$style = 'clear:left;';} else {$style = '';} ?>
     <div class="col-sm-3 col-md-2 img-row" style="{{$style}}">
 
       <div class="thumbnail thumbnail-img" data-id="{{ $file_name }}" id="img_thumbnail_{{ $key }}" style="margin-bottom: 0px">
-        <img id="{{ $file }}" src="{{ $thumb_src }}" alt="" class="pointer" onclick="useFile('{{ $file_name }}')" width="200px" max-height="200px">
+        <img id="{{ $file }}" src="{{ $thumb_src }}" alt="" class="pointer" onclick="useFile('{{ $long_name }}')" width="200px" max-height="200px">
       </div>
 
       <div class="caption text-center" style="margin-bottom: 20px">
         <div class="btn-group ">
-          <button type="button" onclick="useFile('{{ $file_name }}')" class="btn btn-default btn-xs">
+          <button type="button" onclick="useFile('{{ $long_name }}')" class="btn btn-default btn-xs">
             {{--{{ str_limit($file_name, $limit = 10, $end = '...') }}--}}
             {{ '請選擇' }}
           </button>
