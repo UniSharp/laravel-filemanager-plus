@@ -176,4 +176,17 @@ class LfmController extends Controller {
 
         return $arr_filename;
     }
+
+    public function sortByColumn($arr_filename, $key_to_sort, $order = null)
+    {
+        uasort($arr_filename, function ($a, $b) use ($key_to_sort, $order) {
+            if ($order == 'desc') {
+                return strcmp(strtoupper($a[$key_to_sort]), strtoupper($b[$key_to_sort])) * -1;
+            }
+
+            return strcmp(strtoupper($a[$key_to_sort]), strtoupper($b[$key_to_sort]));
+        });
+
+        return $arr_filename;
+    }
 }

@@ -40,6 +40,7 @@ class ItemsController extends LfmController {
             Input::get('subcat_id'), $current_page, $totalRecord);
         $file_info   = $this->getFileInfos($files, $type);
         $directories = parent::getDirectories($path);
+        $directories = parent::sortByColumn($directories, 'short', 'desc');
         $thumb_url   = Config::get('lfm.images_thumb_url');
 
         $items_per_page = 30;

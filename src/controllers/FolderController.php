@@ -25,6 +25,7 @@ class FolderController extends LfmController {
         $share_path     = parent::getPath('share');
         $lfm_share_path = parent::getFileName($share_path);
         $shared_folders = parent::getDirectories($share_path);
+        $shared_folders = parent::sortByColumn($shared_folders, 'short');
 
         return view('laravel-filemanager::tree')
             ->with('user_dir', $lfm_user_path['long'])
