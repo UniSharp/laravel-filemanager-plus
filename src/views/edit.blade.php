@@ -58,7 +58,7 @@
               <input id='tc_author' class="form-control" value="{{@$entity->tc_author}}"/>
             </div>
             <div class="form-group">
-              <label>{{ Lang::get('laravel-filemanager::lfm.edit-desc-ch') }}</label>
+              <label>{{ Lang::get('laravel-filemanager::lfm.edit-desc-ch') }} <span class="text-danger">前台將顯示 69 字元</span></label>
               <textarea id='tc_caption' rows="5" class="form-control">{{@$entity->tc_caption}}</textarea>
             </div>
             <div class="form-group">
@@ -89,7 +89,7 @@
               <input id='en_author' class="form-control" value="{{@$entity->en_author}}"/>
             </div>
             <div class="form-group">
-              <label>{{ Lang::get('laravel-filemanager::lfm.edit-desc-en') }}</label>
+              <label>{{ Lang::get('laravel-filemanager::lfm.edit-desc-en') }} <span class="text-danger">前台將顯示 150 字元</span></label>
               <textarea id='en_caption' rows="5" class="form-control">{{@$entity->en_caption}}</textarea>
             </div>
             <div class="form-group">
