@@ -14,14 +14,14 @@ class EditController extends LfmController {
 
     public function getEdit() {
         $inputImgName = Input::get('imgName');
-        $inputWorkingDir = Input::get('working_dir');
+        //$inputWorkingDir = Input::get('working_dir');
         $imgName = pathinfo($inputImgName)['basename'];
 
         $data = ImgDataHttpClient::getImgEntity($imgName);
         $data_arr = json_decode(json_encode($data), true);
 
-        // $oriImgSrc = Config::get('lfm.images_thumb_url') . $inputImgName;
-        $oriImgSrc = Config::get('lfm.images_thumb_url') . str_replace('shares', '', $inputWorkingDir) .  '/' . $inputImgName;
+        $oriImgSrc = Config::get('lfm.images_thumb_url') . $inputImgName;
+        //$oriImgSrc = Config::get('lfm.images_thumb_url') . str_replace('shares', '', $inputWorkingDir) .  '/' . $inputImgName;
         // $from = '/' . preg_quote(Config::get('lfm.images_url'), '/') . '/';
         // $thumbImgSrc = preg_replace($from, Config::get('lfm.images_thumb_url'), $oriImgSrc, 1);
         return View::make('laravel-filemanager::edit')
