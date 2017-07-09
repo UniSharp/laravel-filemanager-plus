@@ -22,7 +22,7 @@ class EditController extends LfmController {
 
         //$oriImgSrc = Config::get('lfm.images_thumb_url') . $inputImgName;
         //$oriImgSrc = Config::get('lfm.images_thumb_url') . str_replace('shares', '', $inputWorkingDir) .  '/' . $inputImgName;
-        $oriImgSrc = Config::get('lfm.images_url') . Config::get('lfm.shared_folder_name') . str_replace('shares', '', $inputWorkingDir) .  '/' . $inputImgName;
+        $oriImgSrc = Config::get('lfm.images_url') . Config::get('lfm.shared_folder_name') . str_replace('shares', '', $inputWorkingDir) .  '/' . str_replace('shares', '', $inputImgName);
         // $from = '/' . preg_quote(Config::get('lfm.images_url'), '/') . '/';
         // $thumbImgSrc = preg_replace($from, Config::get('lfm.images_thumb_url'), $oriImgSrc, 1);
         return View::make('laravel-filemanager::edit')
