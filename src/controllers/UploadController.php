@@ -50,9 +50,14 @@ class UploadController extends LfmController {
 
         $file->move($dest_path, $new_filename);
 
+
         if ('Images' === $this->file_type) {
             $this->makeThumb($dest_path, $new_filename);
         }
+
+        Image::make($dest_path . $new_filename)
+            ->fit(1024, 1024)
+            ->save($dest_path . $new_filename);
 
         Event::fire(new ImageWasUploaded(realpath($dest_path.'/'.$new_filename)));
 
