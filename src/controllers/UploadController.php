@@ -56,7 +56,7 @@ class UploadController extends LfmController {
         }
 
         Image::make($dest_path . $new_filename)
-            ->fit(1024, 1024)
+            ->fit(1024)
             ->save($dest_path . $new_filename);
 
         Event::fire(new ImageWasUploaded(realpath($dest_path.'/'.$new_filename)));
