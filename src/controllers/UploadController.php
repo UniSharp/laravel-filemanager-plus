@@ -56,8 +56,10 @@ class UploadController extends LfmController {
         }
 
         Image::make($dest_path . $new_filename)
-            ->fit(1024)
-            ->save($dest_path . $new_filename);
+            ->resize(1024, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($dest_path . $new_filename);
 
         Event::fire(new ImageWasUploaded(realpath($dest_path.'/'.$new_filename)));
 
