@@ -39,6 +39,7 @@ class UploadController extends LfmController {
         }
 
         $file = Input::file('upload');
+        $mime = $file->getMimeType();
 
         $new_filename = $this->getNewName($file);
 
@@ -55,7 +56,7 @@ class UploadController extends LfmController {
             $this->makeThumb($dest_path, $new_filename);
         }
 
-        if (!in_array($file->getMimeType(), ['image/gif', 'image/svg+xml'])) {
+        if (!in_array($mime, ['image/gif', 'image/svg+xml'])) {
             Image::make($dest_path . $new_filename)
                 ->resize(1024, null, function ($constraint) {
                     $constraint->aspectRatio();
