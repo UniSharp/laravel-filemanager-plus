@@ -55,11 +55,13 @@ class UploadController extends LfmController {
             $this->makeThumb($dest_path, $new_filename);
         }
 
-        Image::make($dest_path . $new_filename)
-            ->resize(1024, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($dest_path . $new_filename);
+        if (!in_array($file->getMimeType(), ['image/gif', 'image/svg+xml'])) {
+            Image::make($dest_path . $new_filename)
+                ->resize(1024, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($dest_path . $new_filename);
+        }
 
         Event::fire(new ImageWasUploaded(realpath($dest_path.'/'.$new_filename)));
 
